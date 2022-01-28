@@ -11,15 +11,15 @@ def get_data(ticker, start): #pobieranie danych giełdowych
     if not ticker:
         ticker = 'AAPL'
     data = pdr.get_data_yahoo(ticker, start)
-    st.dataframe(data)
+    st.dataframe(data.iloc[::-1])
     return data
 
-name = st.text_input("Podaj nazwe spolki")
+name = st.text_input("Insert company ticker")
 data = get_data(name,start)
 
 option = st.selectbox(
-     'Wybierz wykres',
-     ('Price', 'MACD', 'KD', 'Volatility'))
+     'Choose Chart',
+     ('Price', 'MACD', 'Stochastic Oscillator', 'Volatility'))
 
 #plotVolatility dane
 data['Log returns'] = np.log(data['Close']/data['Close'].shift())
@@ -27,12 +27,12 @@ volatility = data['Log returns'].std() * 252 ** .5 #obliczenie Volatility
 str_vol = str(round(volatility, 4)*100) #\
 
 #plotMACD dane
-exp1 = data['Close'].ewm(span=12, adjust=False).mean() #srednia kroczaca 12dniowa 
-exp2 = data['Close'].ewm(span=26, adjust=False).mean() #srednia kroczaca 26dniowa
+exp1 = data['Close'].ewm(span=12, adjust=False).mean() #exp srednia kroczaca 12dniowa 
+exp2 = data['Close'].ewm(span=26, adjust=False).mean() #exp srednia kroczaca 26dniowa
 data['MACD'] = exp1 - exp2 #Stworzenie kolumny 'MACD'
 data['Signal Line'] = data['MACD'].ewm(span=9, adjust=False).mean() #Stworzenie kolumny 'Signal Line'
 
-#plotKD dane
+#plotOscilator dane
 high14 = data['High'].rolling(14).max()
 low14 = data['Low'].rolling(14).min()
 data['%K'] = (data['Close'] - low14) * 100/(high14 - low14)
@@ -54,7 +54,7 @@ def plotMACD(data):
     data['Close'].plot(ax=ax, alpha=0.25, secondary_y= True)
     st.pyplot(fig)
     
-def plotKD(data):   
+def plotOscilator(data):   
     fig,  ax = plt.subplots()
     data[['%K', '%D']].plot(ax=ax)
     ax.set_title(name)
@@ -75,9 +75,10 @@ if option == 'Price':
     plotClose(data)
 elif option == 'MACD':
     plotMACD(data)
-elif option == 'KD':
-    plotKD(data)
+elif option == 'Stochastic Oscillator':
+    plotOscilator(data)
 elif option == 'Volatility':
     plotVolatility(data)
     
+
 
