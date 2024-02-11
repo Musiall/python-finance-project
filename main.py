@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas_datareader as pdr
+from pandas_datareader import data as pdr
 import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
