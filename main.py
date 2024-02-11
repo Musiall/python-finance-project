@@ -3,6 +3,11 @@ import pandas_datareader as pdr
 import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
+import yfinance as yfin
+
+
+yfin.pdr_override()
+
 
 start = dt.datetime(2021,1,1).date() #ustawienie startu pobierania danych
 
