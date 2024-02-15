@@ -4,7 +4,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
 import yfinance as yfin
-from streamlit_plotly_events import plotly_events
+
 import plotly.express as px
 
 yfin.pdr_override()
