@@ -4,7 +4,8 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
 import yfinance as yfin
-
+from streamlit_plotly_events import plotly_events
+import plotly.express as px
 
 yfin.pdr_override()
 
@@ -44,12 +45,10 @@ data['%K'] = (data['Close'] - low14) * 100/(high14 - low14)
 data['%D'] = data['%K'].rolling(3).mean()
 
 def plotClose(data):
-    fig, ax = plt.subplots()
-    data['Close'].plot(ax=ax)
-    ax.set_ylabel("Price")
-    ax.set_title(name)
-    ax.set_xlabel("Time")
-    st.pyplot(fig)
+    fig = px.line(data,
+            y='Close',  
+            title="Stock Market Performance for the Last 3 Months")
+    fig.show()
 
 def plotMACD(data):
     fig, ax = plt.subplots()
