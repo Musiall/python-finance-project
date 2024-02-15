@@ -48,7 +48,8 @@ def plotClose(data):
     fig = px.line(data,
             y='Close',  
             title="Stock Market Performance for the Last 3 Months")
-    fig.show()
+    st.plotly_chart(fig)
+
 
 def plotMACD(data):
     fig, ax = plt.subplots()
