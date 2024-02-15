@@ -3,4 +3,4 @@ pandas==2.0.3
 matplotlib==3.3.4
 yfinance==0.2.35
 plotly==5.18.0
-streamlit_plotly_events==0.0.6
+
