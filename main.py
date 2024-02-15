@@ -57,7 +57,7 @@ def plotMACD(data):
     ax.set_title(name)
     ax.axhline(0, c='r', alpha=0.3)
     data['Close'].plot(ax=ax, alpha=0.25, secondary_y= True)
-    st.plotly_chart(fig)
+    st.pyplot(fig)
     
 def plotOscilator(data):   
     fig,  ax = plt.subplots()
