@@ -102,13 +102,14 @@ def plotOscilator(data):
 #pyoff.iplot(fig)
     st.plotly_chart(fig)
 
-def plotVolatility(data):
-    fig, ax = plt.subplots()
-    data['Log returns'].hist(ax=ax, bins = 50, alpha = 0.6, color = 'b')
-    ax.set_xlabel('Log return')
-    ax.set_ylabel('Freq of log returns')
-    ax.set_title(name + ' Volatility: ' + str_vol + '%')
-    st.pyplot(fig)
+def plotVolatility(data): 
+    fig = px.histogram(data, x="Log returns")
+    fig.update_layout(
+        title_text= name + ' Volatility: ' + str_vol + '%',  # Add a chart title here
+        yaxis_title='Frequency of log returns',  # Rename 'count' to 'Frequency' or your preferred title
+        xaxis_title='Log returns'  # Confirm or change your x-axis title
+    )
+    st.plotly_chart(fig)
 
 if option == 'Price':
     plotClose(data)
