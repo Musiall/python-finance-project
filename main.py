@@ -77,15 +77,31 @@ def plotMACD(data):
 #pyoff.iplot(fig)
     st.plotly_chart(fig)
     
-def plotOscilator(data):   
-    fig,  ax = plt.subplots()
-    data[['%K', '%D']].plot(ax=ax)
-    ax.set_title(name)
-    ax.axhline(80, c='r', alpha=0.3)
-    ax.axhline(20, c='r', alpha=0.3)
-    data['Close'].plot(ax=ax, alpha = 0.3, secondary_y = True)
-    st.pyplot(fig)
-    
+def plotOscilator(data): 
+    plot_data = [
+        go.Scatter(
+            x=data['Date'],
+            y=data['%K'],
+            name = '%K'
+        ),
+        go.Scatter(
+            x=data['Date'],
+            y=data['%D'],
+            name = '%D'
+        )
+    ]
+
+    plot_layout = go.Layout(
+        xaxis=dict(
+            type="date",  # Ensure that the type is set to 'date' for datetime x-axis
+            tickformat='%b %Y',  # Sets the tick format to abbreviated month and full year
+        ),
+        title='Oscilator'
+    )
+    fig = go.Figure(data=plot_data, layout=plot_layout)
+#pyoff.iplot(fig)
+      st.plotly_chart(fig)
+
 def plotVolatility(data):
     fig, ax = plt.subplots()
     data['Log returns'].hist(ax=ax, bins = 50, alpha = 0.6, color = 'b')
