@@ -75,7 +75,7 @@ def plotMACD(data):
     )
     fig = go.Figure(data=plot_data, layout=plot_layout)
 #pyoff.iplot(fig)
-    st.pyplot(fig)
+    st.plotly_chart(fig)
     
 def plotOscilator(data):   
     fig,  ax = plt.subplots()
