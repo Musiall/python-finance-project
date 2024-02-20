@@ -1,5 +1,6 @@
 import streamlit as st
 from pandas_datareader import data as pdr
+import plotly.graph_objs as go 
 import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
