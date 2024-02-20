@@ -100,7 +100,7 @@ def plotOscilator(data):
     )
     fig = go.Figure(data=plot_data, layout=plot_layout)
 #pyoff.iplot(fig)
-      st.plotly_chart(fig)
+    st.plotly_chart(fig)
 
 def plotVolatility(data):
     fig, ax = plt.subplots()
