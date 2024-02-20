@@ -53,12 +53,29 @@ def plotClose(data):
 
 
 def plotMACD(data):
-    fig, ax = plt.subplots()
-    data[['MACD', 'Signal Line']].plot(ax=ax)
-    ax.set_title(name)
-    ax.axhline(0, c='r', alpha=0.3)
-    data['Close'].plot(ax=ax, alpha=0.25, secondary_y= True)
-    st.pyplot(fig)
+    plot_data = [
+        go.Scatter(
+            x=data['Date'],
+            y=data['MACD'],
+            name = 'MACD'
+        ),
+        go.Scatter(
+            x=data['Date'],
+            y=data['Signal Line'],
+            name = 'Signal Line'
+        )
+    ]
+
+    plot_layout = go.Layout(
+        xaxis=dict(
+            type="date",  # Ensure that the type is set to 'date' for datetime x-axis
+            tickformat='%b %Y',  # Sets the tick format to abbreviated month and full year
+        ),
+        title='MACD'
+    )
+    fig = go.Figure(data=plot_data, layout=plot_layout)
+#pyoff.iplot(fig)
+    fig.show()
     
 def plotOscilator(data):   
     fig,  ax = plt.subplots()
