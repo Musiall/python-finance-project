@@ -4,7 +4,6 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
 import yfinance as yfin
-
 import plotly.express as px
 
 yfin.pdr_override()
@@ -22,6 +21,8 @@ def get_data(ticker, start): #pobieranie danych giełdowych
 
 name = st.text_input("Insert company ticker")
 data = get_data(name,start)
+
+data = data.reset_index()
 
 option = st.selectbox(
      'Choose Chart',
